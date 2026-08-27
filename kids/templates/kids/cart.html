@@ -1,0 +1,97 @@
+{% extends 'kids/basic.html' %} 
+{% block tittle %}Cart - Shoppers{% endblock %}
+{% block body %}
+<!-- Cart Container -->
+<div class="container my-5">
+  <h1 class="h3 fw-bold mb-4">
+    <i class="bi bi-cart3 me-2"></i>Your Shopping Cart
+  </h1>
+
+  <div class="row g-4">
+    <!-- Cart Items List -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" class="ps-4">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col" class="text-end pe-4">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cart_items %}
+                <tr>
+                  <td class="ps-4 fw-bold">{{ item.product.name }}</td>
+                  <td>₹{{ item.product.price }}</td>
+                  <td style="width: 100px">
+                    <input
+                      type="number"
+                      class="form-control form-control-sm text-center"
+                      value="{{ item.quantity }}"
+                      min="1"
+                    />
+                  </td>
+                  <td class="fw-bold">₹{{ item.total_price }}</td>
+                  <td class="text-end pe-4">
+                    <button class="btn btn-sm btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center py-5 text-muted">
+                    <i class="bi bi-cart-x display-5 d-block mb-2"></i>
+                    Your cart is currently empty.
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="col-lg-4">
+      <div
+        class="card shadow-sm border-0 rounded-3"
+        style="border-top: 5px solid #99babf !important"
+      >
+        <div class="card-body p-4">
+          <h2 class="h5 fw-bold mb-3">Order Summary</h2>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Subtotal</span>
+            <span class="fw-bold">₹{{ subtotal|default:"0.00" }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3">
+            <span class="text-muted">Shipping</span>
+            <span class="text-success fw-bold">Free</span>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between mb-4 fs-5">
+            <span class="fw-bold">Total</span>
+            <span class="fw-bold text-primary"
+              >₹{{ total|default:"0.00" }}</span
+            >
+          </div>
+          <button class="btn btn-primary w-100 py-2 fw-bold mb-2">
+            Proceed to Checkout
+          </button>
+          <a
+            href="{% url 'kids' %}"
+            class="btn btn-outline-secondary w-100 py-2"
+            >Continue Shopping</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

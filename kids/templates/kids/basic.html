@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS & Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <title>{% block tittle %} {% endblock %}</title>
+
+    <style>
+      .nav-item {
+        margin: 0px 15px;
+      }
+
+      /* --- 1. TYPING TEXT ANIMATION FOR THE BRAND --- */
+      .typing-brand {
+        display: inline-block;
+        font-family: monospace;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 4s steps(8, end) infinite; /* 'Shoppers' is exactly 8 characters */
+      }
+
+      /* The loop that types out and erases the text */
+      @keyframes typing {
+        0% {
+          width: 0;
+        }
+        40% {
+          width: 100%;
+        }
+        60% {
+          width: 100%;
+        }
+        100% {
+          width: 0;
+        }
+      }
+
+      /* Opens the dropdown menu when hovering on desktop screens */
+      @media (min-width: 992px) {
+        .nav-item.dropdown:hover .dropdown-menu {
+          display: block;
+          margin-top: 0;
+        }
+
+        /* Smooth transition setup for the arrow */
+        .dropdown-toggle::after {
+          transition: transform 0.2s ease-in-out;
+          display: inline-block;
+        }
+
+        /* Flips the arrow upward when hovering over the parent container */
+        .nav-item.dropdown:hover .dropdown-toggle::after {
+          transform: rotate(180deg);
+        }
+      }
+    </style>
+    {% block css %} {% endblock %}
+  </head>
+  <body>
+    {% load static %}
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light px-3"
+      style="background-color: #99babf"
+    >
+      <div class="container-fluid">
+        <a
+          class="navbar-brand text-dark fw-bold fs-4 me-4"
+          href="{% url 'kids' %}"
+        >
+          <span class="typing-brand">Shoppers</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-3">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link  dropdown-toggle {% if request.resolver_match.url_name in 'profile,order,logout' %}fw-bold active{% endif %}"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle" style="margin-right: 5px"></i> My
+                Account
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'profile' %}fw-bold active{% endif %}"
+                    href="{% url 'profile' %}"
+                    ><i
+                      class="bi bi-box-seam-fill"
+                      style="margin-right: 5px"
+                    ></i
+                    >Profile</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'order' %}fw-bold active{% endif %}"
+                    href="{% url 'order' %}"
+                    ><i
+                      class="bi bi-box-seam-fill"
+                      style="margin-right: 5px"
+                    ></i
+                    >Order</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'logout' %}fw-bold active{% endif %}"
+                    href="{% url 'logout' %}"
+                    ><i
+                      class="bi bi-box-arrow-right"
+                      style="margin-right: 5px"
+                    ></i
+                    >Log out</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link  dropdown-toggle {% if request.resolver_match.url_name in 'boys,girls,about' %}fw-bold active{% endif %}"
+                href="#"
+                id="navbarDropdownMore"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-three-dots-vertical"></i> More
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'boys' %}fw-bold active{% endif %}"
+                    href="{% url 'boys' %}"
+                    ><i class="bi bi-gender-male me-2"></i>Boys</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'girls' %}fw-bold active{% endif %}"
+                    href="{% url 'girls' %}"
+                    ><i class="bi bi-gender-female me-2"></i>Girls</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item  {% if request.resolver_match.url_name == 'about' %}fw-bold active{% endif %}"
+                    href="{% url 'about' %}"
+                    ><i class="bi bi-info-circle me-2"></i>About</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.url_name == 'contact' %}fw-bold active{% endif %}"
+                href="{%url 'contact'%}"
+                ><i class="bi bi-headset" style="margin-right: 5px"></i>24x7
+                Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.url_name == 'cart' %}fw-bold active{% endif %}"
+                href="{% url 'cart' %}"
+                ><i class="bi bi-cart" style="margin-right: 5px"></i>Cart</a
+              >
+            </li>
+          </ul>
+
+          <!-- Search Form -->
+          <form class="d-flex my-2 my-lg-0" style="margin-right: 20px">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search kids clothes, shoes..."
+              aria-label="Search"
+              style="border-radius: 20px"
+            />
+            <button
+              class="btn btn-dark text-white fw-bold"
+              type="submit"
+              style="border-radius: 20px"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    {% block body %} {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light pt-5 pb-4">
+      <div class="container">
+        <div class="row g-4 mb-4">
+          <div class="col-lg-4 col-md-6">
+            <h5 class="fw-bold text-warning mb-3">
+              Shoppers <span class="text-white fs-6">Kids</span>
+            </h5>
+            <p class="text-muted small">
+              Bringing smiles, comfort, and style to your children's everyday
+              adventures. Designed with love and premium organic fabrics.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-light fs-5"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-light fs-5"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a href="#" class="text-light fs-5"
+                ><i class="bi bi-pinterest"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="fw-bold mb-3">Shop Kids</h6>
+            <ul class="list-unstyled text-muted small">
+              <li class="mb-2">
+                <a
+                  href="{% url 'boys' %}"
+                  class="text-decoration-none text-muted"
+                  >Boys Fashion</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="{% url 'girls' %}"
+                  class="text-decoration-none text-muted"
+                  >Girls Fashion</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h6 class="fw-bold mb-3">Help & Info</h6>
+            <ul class="list-unstyled text-muted small">
+              <li class="mb-2">
+                <a
+                  href="{% url 'order' %}"
+                  class="text-decoration-none text-muted"
+                  >Track Order</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="{% url 'contact' %}"
+                  class="text-decoration-none text-muted"
+                  >24x7 Support</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="{% url 'about' %}"
+                  class="text-decoration-none text-muted"
+                  >About Us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h6 class="fw-bold mb-3">Customer Service</h6>
+            <ul class="list-unstyled text-muted small">
+              <li class="mb-2">
+                <i class="bi bi-envelope me-2"></i>support@shopperskids.com
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-telephone me-2"></i>+91 0000000000
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-clock me-2"></i>Mon - Sat: 9am - 8pm
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="border-secondary" />
+        <div class="text-center text-muted small">
+          &copy; 2026 Shoppers Kids Store. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
