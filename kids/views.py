@@ -11,10 +11,12 @@ def about(request):
     return render(request , 'kids/about.html')
 
 def girls(request):
-    return render(request , 'kids/girls.html')
+    girls = Girl.objects.all()
+    return render(request , 'kids/girls.html',{'productss': girls})
 
 def boys(request):
-    return render(request , 'kids/boys.html')
+    boys = Boy.objects.all()
+    return render(request , 'kids/boys.html',{'productss': boys})
 
 def cart(request):
     return render(request , 'kids/cart.html')
