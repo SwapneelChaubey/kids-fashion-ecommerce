@@ -5,3 +5,5 @@ from .models import *
 
 admin.site.register(Contact)
 admin.site.register(Product)
+admin.site.register(Boy)
+admin.site.register(Girl)
