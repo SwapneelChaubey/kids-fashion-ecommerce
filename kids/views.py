@@ -5,18 +5,19 @@ from .models import *
 
 # Create your views here.
 def kidshomepage(request):
-    return render(request , "kids/index.html")
+    products_views = Product_view.objects.all()
+    return render(request , 'kids/index.html',{'products_views': products_views})
 
 def about(request):
     return render(request , 'kids/about.html')
 
 def girls(request):
     girls = Girl.objects.all()
-    return render(request , 'kids/girls.html',{'productss': girls})
+    return render(request , 'kids/girls.html',{'girls': girls})
 
 def boys(request):
     boys = Boy.objects.all()
-    return render(request , 'kids/boys.html',{'productss': boys})
+    return render(request , 'kids/boys.html',{'boys': boys})
 
 def cart(request):
     return render(request , 'kids/cart.html')
@@ -30,15 +31,12 @@ def order(request):
 def logout(request):
     return render(request , 'kids/logout.html')
 
-def productviews(request):
-    return HttpResponse("this is product views")
-
 def contact(request):
     return render(request , 'kids/contact.html')
 
 def view(request):
     products = Product.objects.all()
-    return render(request , 'kids/view.html',{'productss': products})
+    return render(request , 'kids/view.html',{'products': products})
 
 # def plain(request):
 #     products = Product.objects.all()
