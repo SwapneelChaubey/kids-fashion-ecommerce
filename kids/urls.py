@@ -12,8 +12,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('order/', views.order, name='order'),
     path('logout/', views.logout, name='logout'),
-    path('productviews/', views.productviews, name='productviews'),
     path('view/', views.view, name='view'),
     # path('plain/', views.plain, name='plain'),
+    # path('productviews/', views.productviews, name='productviews'),
 ]
  

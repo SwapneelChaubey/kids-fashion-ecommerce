@@ -33,6 +33,18 @@ class Product(models.Model):
     def __str__(self):
         return self.Products_name
     
+class Product_view(models.Model):
+    Products_id  = models.AutoField(primary_key=True)
+    Products_name = models.CharField(max_length=100)
+    category = models.CharField(max_length=200)
+    price = models.IntegerField()
+    des = models.CharField(max_length=300)
+    date = models.DateTimeField()
+    image = models.ImageField(upload_to='kids/images' ,default="")
+    
+    def __str__(self):
+        return self.Products_name
+    
 class Boy(models.Model):
     Products_id  = models.AutoField(primary_key=True)
     Products_name = models.CharField(max_length=100)
